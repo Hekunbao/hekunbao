@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:context="http://www.springframework.org/schema/context"   
+    xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"   
+    xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:jee="http://www.springframework.org/schema/jee"   
+    xmlns:aop="http://www.springframework.org/schema/aop"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans    
+      http://www.springframework.org/schema/beans/spring-beans-4.3.xsd    
+      http://www.springframework.org/schema/context    
+      http://www.springframework.org/schema/context/spring-context-4.3.xsd    
+      http://www.springframework.org/schema/mvc    
+      http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd    
+      http://www.springframework.org/schema/jee   
+      http://www.springframework.org/schema/jee/spring-jee-4.3.xsd  
+      http://www.springframework.org/schema/tx    
+      http://www.springframework.org/schema/tx/spring-tx-4.3.xsd      
+      http://www.springframework.org/schema/aop   
+      http://www.springframework.org/schema/aop/spring-aop-4.3.xsd"> 
+	
+	<!-- 使用注解进行请求映射 -->
+	<mvc:annotation-driven/>
+	
+	<!-- 视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 重定向时是否加上上下文路径 -->
+		<property name="redirectContextRelative" value="true"></property>
+		<property name="prefix" value="/WEB-INF/pages/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	
+	<!-- 配置扫描控制器 -->
+	<context:component-scan base-package="com.hkb.controller"/>
+	
+	<!--  <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+	<bean name="/userRegister" class="com.hkb.controller.UserController"/>-->
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+     <property name="maxUploadSize" value="104857600" />
+     <property name="maxInMemorySize" value="4096" />
+     <property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+	
+	<mvc:resources location="/upload/" mapping="/upload/**" /> 
+	
+	
+</beans>
